@@ -1,9 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using Common.Events;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
 namespace Common.Commands
 {
+    [MessageNamespace("products.release")]
     public class ReleaseProducts : ICommand
     {
         public Guid OrderId { get; set; }
