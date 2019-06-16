@@ -10,7 +10,7 @@ namespace SagaProcessManager
 {
     class Program
     {
-        public static IConfiguration Configuration { get; set; }
+        private static IConfiguration Configuration { get; set; }
 
         static void Main(string[] args)
         {
@@ -38,13 +38,7 @@ namespace SagaProcessManager
 
             services.AddRabbitMqClient(rabbitMqSection)
                 .AddExchange("exchange.name", exchangeSection)
-                .AddAsyncMessageHandlerSingleton<OrderCreatedMessageHandler>("event.order-created")
-                .AddAsyncMessageHandlerSingleton<OrderRevokedMessageHandler>("event.order-revoked")
-                .AddAsyncMessageHandlerSingleton<RevokeOrderRejectedMessageHandler>("event.revoke-order-rejected")
-                .AddAsyncMessageHandlerSingleton<ProductsReservedMessageHandler>("event.products-reserved")
-                .AddAsyncMessageHandlerSingleton<ReserveProductsRejectedMessageHandler>("event.reserve-products-rejected")
-                .AddAsyncMessageHandlerSingleton<OrderApprovedMessageHandler>("event.order-approved")
-                .AddAsyncMessageHandlerSingleton<ApproveOrderRejectedMessageHandler>("event.approve-order-rejected");
+                .AddEventHandlers();
         }
     }
 }
