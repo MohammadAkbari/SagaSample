@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Common;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -34,13 +35,12 @@ namespace OrderApi
                 .AddExchange("exchange.name", exchangeSection)
                 .AddAsyncNonCyclicMessageHandlerSingleton<RevokeOrderCommandHandler>("order.revoke")
                 .AddAsyncNonCyclicMessageHandlerSingleton<ApproveOrderCommandHandler>("order.approve");
+
+            services.AddHostedService<QueueHostedService>();
         }
          
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            var queueService = app.ApplicationServices.GetService<IQueueService>();
-            queueService.StartConsuming();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

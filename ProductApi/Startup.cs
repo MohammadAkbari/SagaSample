@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Common;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ProductApi.CommandHandlers;
 using RabbitMQ.Client.Core.DependencyInjection;
+using IHostedService = Microsoft.Extensions.Hosting.IHostedService;
 
 namespace ProductApi
 {
@@ -35,8 +37,9 @@ namespace ProductApi
                 .AddAsyncNonCyclicMessageHandlerSingleton<ReserveProductsCommandHandler>("products.reserve")
                 .AddAsyncNonCyclicMessageHandlerSingleton<ReleaseProductsCommandHandler>("products.release");
 
+            services.AddHostedService<QueueHostedService>();
         }
-         
+
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             var queueService = app.ApplicationServices.GetService<IQueueService>();

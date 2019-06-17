@@ -1,44 +1,56 @@
 ﻿using Chronicle;
+using Common;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using RabbitMQ.Client.Core.DependencyInjection;
 using SagaProcessManager.EventHandlers;
-using System;
-using System.IO;
+using Serilog;
 
 namespace SagaProcessManager
 {
     class Program
     {
-        private static IConfiguration Configuration { get; set; }
-
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-            Configuration = builder.Build();
+            var builder = new HostBuilder()
+                  .ConfigureAppConfiguration((hostingContext, config) =>
+                  {
+                      config.AddJsonFile("appsettings.json", optional: true);
+                  })
+                  .ConfigureServices((hostContext, services) =>
+                  {
+                      var configuration = hostContext.Configuration;
 
-            var serviceCollection = new ServiceCollection();
-            ConfigureServices(serviceCollection);
+                      services.AddChronicle();
 
-            var serviceProvider = serviceCollection.BuildServiceProvider();
-            var queueService = serviceProvider.GetRequiredService<IQueueService>();
-            queueService.StartConsuming();
+                      var rabbitMqSection = configuration.GetSection("RabbitMq");
+                      var exchangeSection = configuration.GetSection("RabbitMqExchange");
 
-            Console.WriteLine("Start Consuming");
-        }
+                      services.AddRabbitMqClient(rabbitMqSection)
+                          .AddExchange("exchange.name", exchangeSection)
+                          .AddEventHandlers();
 
-        static void ConfigureServices(IServiceCollection services)
-        {
-            services.AddChronicle();
+                      services.AddHostedService<QueueHostedService>();
+                  })
+                  .ConfigureLogging((hostingContext, logging) =>
+                  {
+                      var configuration = hostingContext.Configuration;
 
-            var rabbitMqSection = Configuration.GetSection("RabbitMq");
-            var exchangeSection = Configuration.GetSection("RabbitMqExchange");
-
-            services.AddRabbitMqClient(rabbitMqSection)
-                .AddExchange("exchange.name", exchangeSection)
-                .AddEventHandlers();
+                      logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                      
+                      logging.AddSerilog();
+                      
+                      Log.Logger = new LoggerConfiguration()
+                          .Enrich.FromLogContext()
+                          .Enrich.WithMachineName()
+                          .Enrich.WithProperty("Assembly", System.AppDomain.CurrentDomain.FriendlyName)
+                          .WriteTo.Seq(configuration["Seq:ServerUrl"])
+                          .CreateLogger();
+                  });
+            
+            builder.RunConsoleAsync().GetAwaiter().GetResult();
         }
     }
 }
