@@ -54,6 +54,8 @@ namespace BackgroundJob
             services.AddSingleton(new JobSchedule(
                 jobType: typeof(HelloWorldJob),
                 cronExpression: "0/10 * * * * ?")); //every 10 seconds
+                //cronExpression: "0 0 13 * * ?")); //every day at 13:00 
+
         };
         
         private static readonly Action<HostBuilderContext, ILoggingBuilder> ConfigureLogging = (hostingContext, logging) =>
