@@ -19,6 +19,8 @@ namespace BackgroundJob
 {
     class Program
     {
+        //dotnet publish -c Release -r win10-x64
+
         public static void Main(string[] args)
         {
             var host = new HostBuilder()
