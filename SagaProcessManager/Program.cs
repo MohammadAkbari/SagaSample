@@ -13,11 +13,8 @@ namespace SagaProcessManager
 {
     class Program
     {
-
-        
         public static void Main(string[] args)
         {
-
             var builder = new HostBuilder()
                   .ConfigureAppConfiguration(ConfigureAppConfiguration)
                   .ConfigureServices(ConfigureServices)
