@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Quartz;
 using Quartz.Impl;
 using Quartz.Spi;
+using Serilog;
 
 namespace BackgroundJob
 {
@@ -64,6 +65,16 @@ namespace BackgroundJob
 
             logging.AddConfiguration(configuration.GetSection("Logging"));
             logging.AddConsole();
+            
+            logging.AddSerilog();
+                      
+            Log.Logger = new LoggerConfiguration()
+                .Enrich.FromLogContext()
+                .Enrich.WithMachineName()
+                .Enrich.WithProperty("Assembly", System.AppDomain.CurrentDomain.FriendlyName)
+                .WriteTo.Seq(configuration["Seq:ServerUrl"])
+                .WriteTo.ColoredConsole()
+                .CreateLogger();
         };
         
         private static readonly Action<HostBuilderContext, IConfigurationBuilder> ConfigureAppConfiguration = (hostingContext, config) =>
