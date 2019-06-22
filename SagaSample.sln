@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductApi", "ProductApi\Pr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{E8EAB89A-4F3B-46B0-9FF1-498B5D787656}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackgroundJob", "BackgroundJob\BackgroundJob.csproj", "{DD6663B4-F41B-4D41-AF9A-4E39703482CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackgroundJob", "BackgroundJob\BackgroundJob.csproj", "{DD6663B4-F41B-4D41-AF9A-4E39703482CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticsearchApp", "ElasticsearchApp\ElasticsearchApp.csproj", "{7882800A-D802-494C-BAF3-4E4BBB184304}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{DD6663B4-F41B-4D41-AF9A-4E39703482CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD6663B4-F41B-4D41-AF9A-4E39703482CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD6663B4-F41B-4D41-AF9A-4E39703482CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7882800A-D802-494C-BAF3-4E4BBB184304}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7882800A-D802-494C-BAF3-4E4BBB184304}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7882800A-D802-494C-BAF3-4E4BBB184304}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7882800A-D802-494C-BAF3-4E4BBB184304}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
