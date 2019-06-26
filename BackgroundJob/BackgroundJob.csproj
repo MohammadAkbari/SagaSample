@@ -31,6 +31,8 @@
         <PackageReference Include="Serilog" Version="2.8.0" />
         <PackageReference Include="Serilog.Sinks.Seq" Version="4.0.0" />
         <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+        <PackageReference Include="Topshelf" Version="4.2.0" />
+        <PackageReference Include="Topshelf.Extensions.Hosting" Version="0.2.0" />
     </ItemGroup> 
 
     <ItemGroup>

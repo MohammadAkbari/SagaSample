@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackgroundJob", "BackgroundJob\BackgroundJob.csproj", "{DD6663B4-F41B-4D41-AF9A-4E39703482CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticsearchApp", "ElasticsearchApp\ElasticsearchApp.csproj", "{7882800A-D802-494C-BAF3-4E4BBB184304}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElasticsearchApp", "ElasticsearchApp\ElasticsearchApp.csproj", "{7882800A-D802-494C-BAF3-4E4BBB184304}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

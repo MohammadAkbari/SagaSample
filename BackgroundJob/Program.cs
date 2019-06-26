@@ -10,6 +10,7 @@ using Quartz;
 using Quartz.Impl;
 using Quartz.Spi;
 using Serilog;
+using Topshelf.Extensions.Hosting;
 
 namespace BackgroundJob
 {
@@ -19,20 +20,26 @@ namespace BackgroundJob
 
         public static void Main(string[] args)
         {
-            var host = new HostBuilder()
+            var hostBuilder = new HostBuilder()
                 .ConfigureAppConfiguration(ConfigureAppConfiguration)
                 .ConfigureServices(ConfigureServices)
-                .ConfigureLogging(ConfigureLogging)
-                .Build();
+                .ConfigureLogging(ConfigureLogging);
 
             if (Debugger.IsAttached)
             {
-                host.Run();
+                hostBuilder.Build().Run();
             }
             else
             {
-                host.RunAsService();
-            }
+                hostBuilder.Build().RunAsService();
+
+                hostBuilder.RunAsTopshelfService(hc =>
+                {
+                    hc.SetServiceName("GenericHostInTopshelf");
+                    hc.SetDisplayName("Generic Host In Topshelf");
+                    hc.SetDescription("Runs a generic host as a Topshelf service.");
+                });
+            }            
         }
 
         private static readonly Action<HostBuilderContext, IServiceCollection> ConfigureServices =
