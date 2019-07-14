@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackgroundJob", "Background
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElasticsearchApp", "ElasticsearchApp\ElasticsearchApp.csproj", "{7882800A-D802-494C-BAF3-4E4BBB184304}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{57A672E5-E37C-45E7-A459-2EB413C57814}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{7882800A-D802-494C-BAF3-4E4BBB184304}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7882800A-D802-494C-BAF3-4E4BBB184304}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7882800A-D802-494C-BAF3-4E4BBB184304}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57A672E5-E37C-45E7-A459-2EB413C57814}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57A672E5-E37C-45E7-A459-2EB413C57814}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57A672E5-E37C-45E7-A459-2EB413C57814}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57A672E5-E37C-45E7-A459-2EB413C57814}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

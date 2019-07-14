@@ -60,7 +60,14 @@ namespace ElasticsearchApp
             
             return response;
         }
-        
+
+        public async Task<ResponseBase> Insert(Post post)
+        {
+            var response = await _client.IndexDocumentAsync(post);
+
+            return response;
+        }
+
         public IEnumerable<Post> Search(string query, int page, int pageSize)
         {
             var result = _client.Search<Post>(x => x.Query(q => q
