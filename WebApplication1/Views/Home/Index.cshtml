@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model HomeIndexVm
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>@Model.Time</p>
+</div>
+
+<div>Time: <span id="time"></span></div>
+<div>CachedTime: <span id="cache-time"></span></div>
+
+@section Scripts{ 
+    <script src="~/js/index.js"></script>
+}

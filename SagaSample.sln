@@ -17,6 +17,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElasticsearchApp", "Elastic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{57A672E5-E37C-45E7-A459-2EB413C57814}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{9E4BFA64-B44C-4964-98BA-27CC6FE6ED47}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redis.ResponseCache", "Redis.ResponseCache\Redis.ResponseCache.csproj", "{AA3BFE6F-517C-4180-85F2-D461CC6FFBC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,14 @@ Global
 		{57A672E5-E37C-45E7-A459-2EB413C57814}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57A672E5-E37C-45E7-A459-2EB413C57814}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57A672E5-E37C-45E7-A459-2EB413C57814}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E4BFA64-B44C-4964-98BA-27CC6FE6ED47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E4BFA64-B44C-4964-98BA-27CC6FE6ED47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E4BFA64-B44C-4964-98BA-27CC6FE6ED47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E4BFA64-B44C-4964-98BA-27CC6FE6ED47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA3BFE6F-517C-4180-85F2-D461CC6FFBC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA3BFE6F-517C-4180-85F2-D461CC6FFBC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA3BFE6F-517C-4180-85F2-D461CC6FFBC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA3BFE6F-517C-4180-85F2-D461CC6FFBC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
