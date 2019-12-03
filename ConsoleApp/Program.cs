@@ -69,6 +69,8 @@ namespace ConsoleApp
     public class ApplicationDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Sheep> Sheeps { get; set; }
+        public DbSet<Rabbit> Rabbits { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -81,6 +83,7 @@ namespace ConsoleApp
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new SheepConfiguration());
 
             base.OnModelCreating(builder);
         }
@@ -96,6 +99,38 @@ namespace ConsoleApp
                 .HasValue<Manager>(nameof(Manager));
         }
     }
+
+    public class SheepConfiguration : IEntityTypeConfiguration<Rabbit>
+    {
+        public void Configure(EntityTypeBuilder<Rabbit> builder)
+        {
+            builder.HasMany(e => e.Sheeps1).WithOne(e => e.Rabbit1).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(e => e.Sheeps2).WithOne(e => e.Rabbit2).OnDelete(DeleteBehavior.Restrict);
+        }
+    }
+
+    public class Sheep
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        public Rabbit Rabbit1 { get; set; }
+        public int Rabbit1Id { get; set; }
+
+        public Rabbit Rabbit2 { get; set; }
+        public int Rabbit2Id { get; set; }
+    }
+
+    public class Rabbit
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        public ICollection<Sheep> Sheeps1 { get; set; }
+
+        public ICollection<Sheep> Sheeps2 { get; set; }
+    }
+
 
     public class User
     {
@@ -122,4 +157,7 @@ namespace ConsoleApp
 
         public string Title { get; set; }
     }
+
+
+
 }

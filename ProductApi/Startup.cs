@@ -1,12 +1,11 @@
 ﻿using Common;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using ProductApi.CommandHandlers;
 using RabbitMQ.Client.Core.DependencyInjection;
-using IHostedService = Microsoft.Extensions.Hosting.IHostedService;
 
 namespace ProductApi
 {
@@ -21,7 +20,7 @@ namespace ProductApi
          
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddControllers();
 
             var rabbitMqSection = Configuration.GetSection("RabbitMq");
             var exchangeSection = Configuration.GetSection("RabbitMqExchange");
@@ -33,25 +32,28 @@ namespace ProductApi
             });
 
             services.AddRabbitMqClient(rabbitMqSection)
-                .AddExchange("exchange.name", exchangeSection) 
+                .AddConsumptionExchange("exchange.name", exchangeSection) 
                 .AddAsyncNonCyclicMessageHandlerSingleton<ReserveProductsCommandHandler>("products.reserve")
                 .AddAsyncNonCyclicMessageHandlerSingleton<ReleaseProductsCommandHandler>("products.release");
 
             services.AddHostedService<QueueHostedService>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             var queueService = app.ApplicationServices.GetService<IQueueService>();
             queueService.StartConsuming();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
+            app.UseRouting();
 
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }
